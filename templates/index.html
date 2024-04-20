@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>sonamang</title>
+    <title>{{ title }}</title>
     <style>
         body {
             text-align: center;
@@ -10,8 +10,17 @@
 </head>
 <body>
     <br>
-    <h1>Sona</h1>
+    <h1>{{ title }}</h1>
     <br>
-    <input type="text">
+    <p>Type the word</p>
+    <p id="word">{{ word }}</p>
+    <form method="post" action="/">
+        <input type="hidden" id="correctWord" name="correctWord" value="{{ word }}">
+        <input type="text" id="typedWord" name="typedWord">
+        <button type="submit">Check</button>
+    </form>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
 </body>
 </html>
