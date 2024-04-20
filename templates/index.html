@@ -16,8 +16,7 @@
     <p id="word">{{ word }}</p>
     <form method="post" action="/">
         <input type="hidden" id="correctWord" name="correctWord" value="{{ word }}">
-        <input type="text" id="typedWord" name="typedWord">
-        <button type="submit">Check</button>
+        <input type="text" id="typedWord" name="typedWord" autofocus>
     </form>
     {% if message %}
         <p>{{ message }}</p>
