@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        typed_word = request.form.get("typeWord")
+        typed_word = request.form.get("typedWord")
         correct_word = request.form.get("correctWord")
 
         if typed_word == correct_word:
@@ -22,7 +22,7 @@ def index():
         title = "Kirjuta " + word.capitalize()
         return render_template("index.html", word=word, message=message,title=title)
 
-    word = random.choice(word)
+    word = random.choice(words)
     title = "Kirjuta " + word.capitalize()
     return render_template("index.html", word=word, title=title)
 
