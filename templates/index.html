@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>sonamang</title>
     <style>
-        body {
-            text-align: center;
-        }
+        body {text-align: center;}
     </style>
 </head>
 <body>
-    <br>
-    <h1>{{ title }}</h1>
-    <br>
-    <p>Type the word</p>
-    <p id="word">{{ word }}</p>
-    <form method="post" action="/">
-        <input type="hidden" id="correctWord" name="correctWord" value="{{ word }}">
-        <input type="text" id="typedWord" name="typedWord" autofocus>
+    <form method="get" action="/game">
+        <button type="submit">Start Game</button>
     </form>
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
 </body>
 </html>
