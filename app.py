@@ -4,7 +4,10 @@ import random
 import time
 
 limit = 2
-words = ["tere", "headaega", "tore", "maailm"]
+
+with open("words.txt", encoding="utf-8") as f:
+    words = f.read().splitlines()
+
 gamewords = []
 game_started = False
 score = 0
