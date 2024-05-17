@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}
+    Game
+{% endblock %}
+{% block contetn %}
+    <h1>SONAMANG</h1>
+    <h4 id="word_lst">näidis</h4>
+    <input type="text" id="text_field" autocompleate="off">
+    <button id="submit_btn" onclick="enter_word()">SISESTA</button>
+
+    <script>
+        var diff = "{{ diff }}";
+        var time = 3000;
+        const words = {{ wordlist | tojson }};
+        var active_words = [];
+        const limit = 3;
+
+        function foreverLoop() {
+            setTimeout(function() {
+                if (time > 500) {
+                    time -= 10
+                }
+                console.log(words);
+                var a = words[Math.floor(Math.random() * words.length)];
+                active_words.push(a);
+
+                if (active_words.length > limit) {
+                    end_game();
+                }
+
+                document.getElementById("word_lst").innerHTML = active_words;
+
+                foreverLoop();
+            }, time);
+        }
+        foreverLoop();
+
+        function end_game() {
+
+        }
+
+        function enter_word() {
+            let word = document.getElementById("text_field").value;
+            if (active_words.includes(word)) {
+                var index = active_words.indexOf(word);
+                if (index !== -1) {
+                active_words.splice(index, 1);  
+                }
+            }
+            document.getElementById("word_lst").innerHTML = active_words;
+            document.getElementById("text_field").value = "";
+            document.getElementById("submit_btn").focus();
+        }
+    </script>
+{% endblock %}
