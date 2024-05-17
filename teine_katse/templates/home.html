@@ -3,7 +3,16 @@
     Home
 {% endblock %}
 {% block contetn %}
-<button></button>
-<button></button>
-<button></button>
+<form method="post">
+    <input type="hidden" name="diff" value="1">
+    <button type="submit" id="diff1">Diff 1</button>
+</form>
+<form method="post">
+    <input type="hidden" name="diff" value="2">
+    <button type="submit" id="diff2">Diff 2</button>
+</form>
+<form method="post">
+    <input type="hidden" name="diff" value="3">
+    <button type="submit" id="diff3">Diff 3</button>
+</form>
 {% endblock %}
