@@ -3,6 +3,7 @@
     Home
 {% endblock %}
 {% block contetn %}
+<h1>VIIMANE SKOOR: {{ score }}</h1>
 <form method="post">
     <input type="hidden" name="diff" value="1">
     <button type="submit" id="diff1">Diff 1</button>
@@ -15,4 +16,34 @@
     <input type="hidden" name="diff" value="3">
     <button type="submit" id="diff3">Diff 3</button>
 </form>
+<div id="scores1"><h3>1 skoorid</h3></div>
+<div id="scores2"><h3>2 skoorid</h3></div>
+<div id="scores3"><h3>3 skoorid</h3></div>
+
+<script>
+    scores1 = {{ scores1 | tojson }};
+    i = 0;
+    while (i < scores1.length) {
+        var p = document.createElement("p");
+        p.innerHTML = scores1[i];
+        document.getElementById("scores1").appendChild(p);
+        i++;
+    }
+    scores2 = {{ scores2 | tojson }};
+    j = 0;
+    while (j < scores2.length) {
+        var p = document.createElement("p");
+        p.innerHTML = scores2[j];
+        document.getElementById("scores2").appendChild(p);
+        j++;
+    }
+    scores3 = {{ scores3 | tojson }};
+    k = 0;
+    while (k < scores3.length) {
+        var p = document.createElement("p");
+        p.innerHTML = scores3[k];
+        document.getElementById("scores3").appendChild(p);
+        k++;
+    }
+</script>
 {% endblock %}
