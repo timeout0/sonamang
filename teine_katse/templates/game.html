@@ -4,31 +4,43 @@
 {% endblock %}
 {% block contetn %}
     <h1>SONAMANG</h1>
-    <h4 id="word_lst">näidis</h4>
+    <h2 id="score">SKOOR: 0</h2>
+    <h3 id="limit">LIMIIT: 0/0</h3>
+    <h4 id="word_lst">--</h4>
     <input type="text" id="text_field" autocompleate="off">
     <button id="submit_btn" onclick="enter_word()">SISESTA</button>
+    <form method="post" id="score_form">
+        <input type="hidden" id="score_form_value" name="score">
+    </form>
 
     <script>
         var diff = "{{ diff }}";
-        var time = 3000;
+        var time;
+        if (diff=="1") {
+            time = 3000;
+        } else if (diff=="2") {
+            time = 2600;
+        } else {
+            time = 2200;
+        }
         const words = {{ wordlist | tojson }};
         var active_words = [];
-        const limit = 3;
+        const limit = 4;
+        var score = 0;
 
         function foreverLoop() {
             setTimeout(function() {
-                if (time > 500) {
-                    time -= 10
-                }
+                time-=time*0.05
                 console.log(words);
                 var a = words[Math.floor(Math.random() * words.length)];
                 active_words.push(a);
 
-                if (active_words.length > limit) {
+                if (active_words.length >= limit) {
                     end_game();
                 }
 
-                document.getElementById("word_lst").innerHTML = active_words;
+                document.getElementById("word_lst").innerHTML = "-"+active_words+"-";
+                document.getElementById("limit").innerHTML="LIMIIT: "+active_words.length+"/"+limit;
 
                 foreverLoop();
             }, time);
@@ -36,7 +48,8 @@
         foreverLoop();
 
         function end_game() {
-
+            document.getElementById("score_form_value").value = score;
+            document.getElementById("score_form").submit();
         }
 
         function enter_word() {
@@ -44,12 +57,24 @@
             if (active_words.includes(word)) {
                 var index = active_words.indexOf(word);
                 if (index !== -1) {
-                active_words.splice(index, 1);  
+                active_words.splice(index, 1);
+                score ++;
+                document.getElementById("score").innerHTML = "SKOOR: " + score;
                 }
             }
-            document.getElementById("word_lst").innerHTML = active_words;
+            document.getElementById("word_lst").innerHTML = "-"+active_words+"-";
+            document.getElementById("limit").innerHTML="LIMIIT: "+active_words.length+"/"+limit;
             document.getElementById("text_field").value = "";
-            document.getElementById("submit_btn").focus();
+            document.getElementById("text_field").focus();
         }
+
+        document.getElementById("text_field").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent the default behavior of Enter key
+            enter_word()
+        }
+    });
+    document.getElementById("text_field").focus();
+    document.getElementById("limit").innerHTML="LIMIIT: 0/"+limit;
     </script>
 {% endblock %}
