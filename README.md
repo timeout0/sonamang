@@ -6,12 +6,12 @@ Welcome to the Flask Game App! This project is a simple web application built us
 + Game Page: Gameplay.
 
 ### File Structure
-+app2.py: Main Flask application file.
-+templates/: Directory containing HTML templates.
-+home.html: HTML and title page scripts.
-+game.html: HTML and gameplay mechanics scripts.
-+scores1.txt, scores2.txt, scores3.txt: Text files storing scores for different difficulty levels.
-+lst1.txt, lst2.txt, lst3.txt: Text files containing word lists for different difficulty levels.
++ app2.py: Main Flask application file.
++ templates/: Directory containing HTML templates.
++ home.html: HTML and title page scripts.
++ game.html: HTML and gameplay mechanics scripts.
++ scores1.txt, scores2.txt, scores3.txt: Text files storing scores for different difficulty levels.
++ lst1.txt, lst2.txt, lst3.txt: Text files containing word lists for different difficulty levels.
 
 ### Setup and Installation, prerequisites
 + Python 3.12 or greater
