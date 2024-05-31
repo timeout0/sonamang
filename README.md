@@ -40,6 +40,7 @@ lst1.txt, lst2.txt, lst3.txt: Text files containing word lists for different dif
 
 ### License
 + This project is licensed under the MIT License.
+
 Copyright (c) 2024 Henri Roger Luhala
 
 Copyright (c) 2024 Oliver Sõmera
