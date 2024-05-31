@@ -4,8 +4,6 @@ from flask import Flask, render_template, session, redirect, url_for, request
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "xxx"
 
-
-
 @app.route("/", methods=["POST","GET"])
 def home():
     if request.method=="POST":
@@ -32,7 +30,7 @@ def game():
             f.write(score+",")
         return redirect(url_for("home"))
     diff = session.get("diff","1")
-    with open("lst"+diff+".txt") as f:
+    with open("lst"+diff+".txt", encoding="utf-8") as f:
         wordlist = f.read().split("\n") 
     return render_template("game.html",diff=diff,wordlist=wordlist)
 
