@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}
+    Home
+{% endblock %}
+{% block contetn %}
+<style>
+    
+    body {
+        background: linear-gradient(to bottom right, white, orange);
+        text-align: center;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .scores-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 0px;
+            }
+    
+    button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        font-size: 16px; 
+        background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+      border: 0;
+      border-radius: 12px;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: inline-block;
+      font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 2.5;
+      outline: transparent;
+      padding: 0 1rem;
+      text-align: center;
+      text-decoration: none;
+      transition: box-shadow .2s ease-in-out;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      white-space: nowrap;
+    }
+    
+    button:not([disabled]):focus {
+      box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+    }
+    
+    button:not([disabled]):hover {
+      box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+    }
+    
+    h1 {
+        margin: 10px 0;
+        margin-bottom: 20px;
+        margin-top: 50px;
+    }
+
+    p {
+        margin: 10px 0;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+    
+    </style>
+    
+<h1>VIIMANE SKOOR: {{ score }}</h1>
+<form method="post">
+    <input type="hidden" name="diff" value="1">
+    <button type="submit" id="diff1">Lihtne</button>
+</form>
+<form method="post">
+    <input type="hidden" name="diff" value="2">
+    <button type="submit" id="diff2">Keskmine</button>
+</form>
+<form method="post">
+    <input type="hidden" name="diff" value="3">
+    <button type="submit" id="diff3">Raske</button>
+</form>
+<h1>SKOORID</h1>
+<div class = "scores-container">
+    <div id="scores1"><h3>  lihtne -</h3></div>
+    <div id="scores2"><h3>-    keskmine    -</h3></div>
+    <div id="scores3"><h3>-    raske  </h3></div>
+</div>
+
+<script>
+    scores1 = {{ scores1 | tojson }};
+    i = 0;
+    while (i < scores1.length) {
+        var p = document.createElement("p");
+        p.innerHTML = scores1[i];
+        document.getElementById("scores1").appendChild(p);
+        i++;
+    }
+    scores2 = {{ scores2 | tojson }};
+    j = 0;
+    while (j < scores2.length) {
+        var p = document.createElement("p");
+        p.innerHTML = scores2[j];
+        document.getElementById("scores2").appendChild(p);
+        j++;
+    }
+    scores3 = {{ scores3 | tojson }};
+    k = 0;
+    while (k < scores3.length) {
+        var p = document.createElement("p");
+        p.innerHTML = scores3[k];
+        document.getElementById("scores3").appendChild(p);
+        k++;
+    }
+</script>
+{% endblock %}
+</html>

@@ -1,0 +1,161 @@
+    {% extends "base.html" %}
+    {% block title %}
+        Game
+    {% endblock %}
+    {% block contetn %}
+    <style>
+    
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            height: 100vh; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        h1, p {
+            margin: 10px 0;
+        }
+        
+        button {
+          appearance: none;
+          background-color: #FFFFFF;
+          border-radius: 40em;
+          border-style: none;
+          box-shadow: #ADCFFF 0 -12px 6px inset;
+          box-sizing: border-box;
+          color: #000000;
+          cursor: pointer;
+          display: inline-block;
+          font-family: -apple-system,sans-serif;
+          font-size: 1.2rem;
+          font-weight: 700;
+          letter-spacing: -.24px;
+          margin: 0;
+          outline: none;
+          padding: 1rem 1.3rem;
+          quotes: auto;
+          text-align: center;
+          text-decoration: none;
+          transition: all .15s;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          margin-top: 20px;
+        }
+        
+        button:hover {
+          background-color: #FFC229;
+          box-shadow: #FF6314 0 -6px 8px inset;
+          transform: scale(1.125);
+        }
+        
+        button:active {
+          transform: scale(1.025);
+        }
+        
+        @media (min-width: 768px) {
+          button {
+            font-size: 1.5rem;
+            padding: .75rem 2rem;
+          }
+        }
+        </style>
+        <script>
+            window.onload = function() {
+                var diff = "{{ diff }}";
+                var gradientStartColor, gradientEndColor;
+        
+                if (diff == "1") {
+                    gradientStartColor = "white";
+                    gradientEndColor = "lightblue";
+                } else if (diff == "2") {
+                    gradientStartColor = "lightgreen";
+                    gradientEndColor = "lightyellow";
+                } else {
+                    gradientStartColor = "lightcoral";
+                    gradientEndColor = "lightsalmon";
+                }
+        
+                document.body.style.background = "linear-gradient(to bottom, " + gradientStartColor + ", " + gradientEndColor + ")";
+            };
+        </script>
+        <h1>SONAMANG</h1>
+        <h2 id="score">SKOOR: 0</h2>
+        <h3 id="limit">LIMIIT: 0/0</h3>
+        <h4 id="word_lst">--</h4>
+        <input type="text" id="text_field" autocompleate="off">
+        <button id="submit_btn" onclick="enter_word()">SISESTA</button>
+        <button id="game_ender" onclick="end_game()">Lõpeta</button>
+        <form method="post" id="score_form">
+            <input type="hidden" id="score_form_value" name="score">
+        </form>
+    
+        <script>
+            var diff = "{{ diff }}";
+            var time;
+            if (diff=="1") {
+                time = 3000;
+            } else if (diff=="2") {
+                time = 2600;
+            } else {
+                time = 2200;
+            }
+            const words = {{ wordlist | tojson }};
+            var active_words = [];
+            const limit = 12 / parseInt(diff);
+            var score = 0;
+    
+            function foreverLoop() {
+                setTimeout(function() {
+                    time-=time*0.05
+                    console.log(words);
+                    var a = words[Math.floor(Math.random() * words.length)];
+                    active_words.push(a);
+    
+                    if (active_words.length >= limit) {
+                        end_game();
+                    }
+    
+                    document.getElementById("word_lst").innerHTML = "-"+active_words+"-";
+                    document.getElementById("limit").innerHTML="LIMIIT: "+active_words.length+"/"+limit;
+    
+                    foreverLoop();
+                }, time);
+            }
+            foreverLoop();
+    
+            function end_game() {
+                document.getElementById("score_form_value").value = score;
+                document.getElementById("score_form").submit();
+            }
+    
+            function enter_word() {
+                let word = document.getElementById("text_field").value;
+                if (active_words.includes(word)) {
+                    var index = active_words.indexOf(word);
+                    if (index !== -1) {
+                    active_words.splice(index, 1);
+                    score ++;
+                    document.getElementById("score").innerHTML = "SKOOR: " + score;
+                    }
+                }
+                document.getElementById("word_lst").innerHTML = "-"+active_words+"-";
+                document.getElementById("limit").innerHTML="LIMIIT: "+active_words.length+"/"+limit;
+                document.getElementById("text_field").value = "";
+                document.getElementById("text_field").focus();
+            }
+    
+            document.getElementById("text_field").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent the default behavior of Enter key
+                enter_word()
+            }
+        });
+        document.getElementById("text_field").focus();
+        document.getElementById("limit").innerHTML="LIMIIT: 0/"+limit;
+        </script>
+    {% endblock %}
