@@ -13,11 +13,11 @@ def home():
         return redirect(url_for("game"))
     score = session.get("score","0")
     with open("scores1.txt","r") as f:
-        scores1 = sorted([int(x) for x in f.read().split(",")[:-1]],)[::-1]
+        scores1 = sorted([int(x) for x in f.read().split(",")[:-1]],)[::-1][0:5]
     with open("scores2.txt","r") as f:
-        scores2 = sorted([int(x) for x in f.read().split(",")[:-1]],)[::-1]
+        scores2 = sorted([int(x) for x in f.read().split(",")[:-1]],)[::-1][0:5]
     with open("scores3.txt","r") as f:
-        scores3 = sorted([int(x) for x in f.read().split(",")[:-1]],)[::-1]
+        scores3 = sorted([int(x) for x in f.read().split(",")[:-1]],)[::-1][0:5]
     return render_template("home.html",score=score,scores1=scores1,scores2=scores2,scores3=scores3)
 
 
