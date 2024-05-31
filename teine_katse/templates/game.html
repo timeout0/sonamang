@@ -106,7 +106,7 @@
             }
             const words = {{ wordlist | tojson }};
             var active_words = [];
-            const limit = 4;
+            const limit = 4 * parseInt(diff);
             var score = 0;
     
             function foreverLoop() {
