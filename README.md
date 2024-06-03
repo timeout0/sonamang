@@ -6,7 +6,7 @@ Welcome to the Flask Game App! This project is a simple web application built us
 + Game Page: Gameplay.
 
 ## File Structure
-+ app2.py: Main Flask application file.
++ app.py: Main Flask application file.
 + templates/: Directory containing HTML templates.
 + home.html: HTML and title page scripts.
 + game.html: HTML and gameplay mechanics scripts.
@@ -23,7 +23,7 @@ Welcome to the Flask Game App! This project is a simple web application built us
 + Install Flask: pip install Flask
 
 ### Running the App
-+ Run app2.py
++ Run app.py
 + Open your web browser and navigate to http://127.0.0.1:5000/ to view the application.
 
 ## Usage
